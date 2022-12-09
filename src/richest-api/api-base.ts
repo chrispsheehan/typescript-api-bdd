@@ -8,15 +8,14 @@ export class RichestApiBase extends RichestApiConfig {
         super();
     }
 
-    get(targetResouce: string, authToken: string, ): request.Test {
-        return request(this.baseUrl)
-            .get(`/${targetResouce}/`)
-            .set('Authorization', 'bearer ' + authToken)
-    }
-
     post(targetResouce: string, content: object): request.Test {
         return request(this.baseUrl)
             .post(`/${targetResouce}/`)
             .send(content)
+    }
+
+    postWithAuth(targetResouce: string, authToken: string, content: object) {
+        return this.post(targetResouce, content)
+            .set('Authorization', 'bearer ' + authToken)
     }
 }
