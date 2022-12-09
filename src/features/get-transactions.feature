@@ -1,4 +1,6 @@
 Feature: Get Tranactions
+    The correct response codes are returned from the API
+    This can be considered a smoke test - run on merge / core tests
 
 Scenario: OK status
     Given a user has made a valid transaction request

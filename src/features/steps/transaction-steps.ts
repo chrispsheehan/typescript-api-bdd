@@ -13,6 +13,8 @@ const validRequest: TransactionsReq = {
             amount: randomAmount(1, 300), // generate a random amount - check dps/min maxs + try spicy amounts
             description: "automated test" // probably add some reference helpful for debugging - datestamp?
         }
+
+        /// There is a lot more to go into here, for example sending some naughty strings etc etc https://github.com/minimaxir/big-list-of-naughty-strings
     ]
 }
 
@@ -30,7 +32,9 @@ Given('a user has made a valid transaction request', function() {
 
 Then('it should return a response with a {string} status code', function(statusCode: number) {
     
-    this.tranactionsapi.getTransactions(this.transactionReq, statusCode); // excute the request
+    this.tranactionsapi.getTransactions(this.transactionReq, statusCode); 
+    
+    // excute the request and check the status code is as pwe expected
 });
 
 Given('a user has attempted to access a resource that they do not have permission to access', function () {
