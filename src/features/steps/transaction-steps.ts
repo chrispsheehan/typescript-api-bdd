@@ -5,7 +5,7 @@ import { uuid } from 'uuidv4';
 import { randomAmount } from '../support/helper'
 
 const validRequest: TransactionsReq = {
-    enrichments: [ "some-enrichment"],
+    enrichments: [ "some-enrichment"], //not sure on the expected values here
     transactions: [
         {
             id: uuid(), // presumming this needs to be unique to the call
@@ -18,7 +18,7 @@ const validRequest: TransactionsReq = {
 
 const invalidRequest: Object = {
     badger: true,
-    mushroom: ["button"]
+    mushroom: ["button"] // random object designed to fail
 }
 
 Given('a user has made a valid transaction request', function() {
