@@ -12,7 +12,7 @@ Before(async function () {
 
     this.tranactionsapi = new RichestApiTransactions();
 
-    this.transactionReq = new Object();
+    this.transactionReq = {};
 
     this.transactionResp = {};
 });

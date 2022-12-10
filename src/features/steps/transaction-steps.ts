@@ -34,18 +34,11 @@ Given('a user has made a valid transaction request', function() {
 
 Then('it should return a response with a {int} status code', async function(statusCode: number) {
     
-    this.transactionResp = this.tranactionsapi.getTransactions(this.transactionReq) // execute the request
-    .end(function(err: any, res: any){
+    this.transactionResp = await this.tranactionsapi.getTransactions(this.transactionReq)
+    .then(function(res: any){
         expect(res.status).to.equal(statusCode) // assertion
         return res;
     });
-});
-
-Given('a user has attempted to access a resource that they do not have permission to access', function () {
-
-    // simulated by NOT setting the token to a valid one
-
-    this.transactionReq = validRequest // valid req
 });
 
 Given('a user has attempted to access a resource that requires authentication', function () {
@@ -63,38 +56,11 @@ Given('a user has made an invalid request', function () {
 });
 
 Then('valid items are discovered', function() { 
-    // let transactions: Transaction[] = JSON.parse(JSON.stringify(this.transactionResp.data));
 
-    // console.log('mewo' + JSON.stringify(transactions));
-    this.transactionResp = this.tranactionsapi.getTransactions(this.transactionReq) // execute the request
-    .then((resp: any) => {
-
-        //let transactions: Transaction[] = resp.data;
-
-        //console.log('asasasasasasasas' + JSON.stringify(resp))
-
-        let asasas = JSON.parse(JSON.stringify(resp));
-
-        console.log('bbbbb' + JSON.stringify(asasas.req.data));
-        // // Check the response type and length
-        // expect(Array.isArray(response.body)).toBeTruthy()
-        // expect(response.body.length).toEqual(1)
-
-        // // Check the response data
-        // expect(response.body[0]._id).toBe(post.id)
-        // expect(response.body[0].title).toBe(post.title)
-        // expect(response.body[0].content).toBe(post.content)
-    })
+    //console.log('asasas' + JSON.stringify(this.transactionResp));
 
     //expect(this.transactionResp.data[0].amount).to.not.be.null
-
-    // let aaaa = JSON.parse(JSON.stringify(this.transactionResp));
-
-    // console.log('asas' + JSON.stringify(this.transactionResp));
-
-
-    // expect(this.transactionResp.data[0].amount).to.not.be.null
-    // let sampleTransaction = JSON.parse(JSON.stringify(this.transactionResp.data));
+    //let transactions: Transaction[] = this.transactionResp.req.text;
     //expect(transactions[0].amount).to.be.an('string');
     // expect(sampleTransaction.category).to.be.an('array');
     // expect(sampleTransaction.date).to.be.an('array');
