@@ -9,7 +9,7 @@ export class RichestApiConfig {
     constructor() {
 
         // the below variables can also be environmental variables
-        this.baseUrl = `${env.BASE_URL}/${env.API_VERSION}/`;
+        this.baseUrl = `${env.BASE_URL}/${env.API_VERSION}`;
         this.clientId = env.CLIENT_ID;
         this.clientSecret = env.CLIENT_SECRET;
     }
