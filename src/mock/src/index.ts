@@ -14,29 +14,45 @@ app.get('/', (req, res) => {
 
 ///////////// VALID ROUTES ///////////////
 
-app.post('/v1/enriched-transactions', (req, res) => { 
+app.post('/v1/enriched-transactions', (req, res) => {
 
-  logRequest('Handled', req);
-  res.json([
-    {
-      amount: 34621704.956994176,
-      category: "irure nostrud culpa anim",
-      date: -24022252.74655731,
-      description: "amet reprehenderit non laboris commodo",
-      id: "do voluptate id amet cillum",
-      merchant: "elit irure nulla",
-      regularity: "commod"
-    },
-    {
-      amount: -20828901.99304095,
-      category: "ex ut tempor exercitation",
-      date: 61956111.34458655,
-      description: "officia n",
-      id: "sint amet magna enim laborum",
-      merchant: "ut dolore irure cillum",
-      regularity: "est"
-    }
-  ]);
+  if(req.headers['authorization'] == 'bearer INVALID_TOKEN')
+  {
+    res.status(401).send({
+      "code": "authentication_error",
+      "message": "aliquip Ut"
+    })
+  }
+  else if(JSON.stringify(req.body).includes('badger'))
+  {
+    res.status(400).send({
+      "code": "authentication_error",
+      "message": "aliquip Ut"
+    })
+  }
+  else {
+    logRequest('Handled', req);
+    res.json([
+      {
+        amount: 34621704.956994176,
+        category: "irure nostrud culpa anim",
+        date: -24022252.74655731,
+        description: "amet reprehenderit non laboris commodo",
+        id: "do voluptate id amet cillum",
+        merchant: "elit irure nulla",
+        regularity: "commod"
+      },
+      {
+        amount: -20828901.99304095,
+        category: "ex ut tempor exercitation",
+        date: 61956111.34458655,
+        description: "officia n",
+        id: "sint amet magna enim laborum",
+        merchant: "ut dolore irure cillum",
+        regularity: "est"
+      }
+    ]);
+  }
 });
 
 app.post('/v1/oauth/token', (req, res) => { 

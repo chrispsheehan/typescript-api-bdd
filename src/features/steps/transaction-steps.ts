@@ -2,6 +2,8 @@ import { Given, Then } from '@cucumber/cucumber';
 import { TransactionsReq } from '../../richest-api/types/transactions.req';
 import { uuid } from 'uuidv4';
 import { randomAmount } from '../support/helper'
+import { expect } from 'chai';
+import request from "supertest";
 
 const validRequest: TransactionsReq = {
     enrichments: [ "some-enrichment"], //not sure on the expected values here
@@ -29,11 +31,12 @@ Given('a user has made a valid transaction request', function() {
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
 });
 
-Then('it should return a response with a {string} status code', function(statusCode: number) {
+Then('it should return a response with a {int} status code', function(statusCode: number) {
     
-    this.tranactionsapi.getTransactions(this.transactionReq, statusCode); 
-    
-    // excute the request and check the status code is as pwe expected
+    this.tranactionsapi.getTransactions(this.transactionReq) // execute the request
+    .end(function(err: any, res: any){
+        expect(res.status).to.equal(statusCode) // assertion
+    });
 });
 
 Given('a user has attempted to access a resource that they do not have permission to access', function () {

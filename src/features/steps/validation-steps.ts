@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { Given, Then } from '@cucumber/cucumber';
+import { Given, Then, When } from '@cucumber/cucumber';
 
 Then('valid items are discovered', function(statusCode: number) {
     
@@ -8,10 +8,9 @@ Then('valid items are discovered', function(statusCode: number) {
     // excute the request and check the status code is as pwe expected
 });
 
-Given('the response json is returned', function () {
-
-    // simulated by NOT setting the token to a valid one
-
-    this.transactionReq = validRequest // valid req
+When('the response json is returned', function () {
+    
+    // Write code here that turns the phrase above into concrete actions
+    return 'pending';
 });
 
