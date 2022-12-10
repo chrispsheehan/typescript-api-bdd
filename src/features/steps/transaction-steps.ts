@@ -3,7 +3,6 @@ import { TransactionsReq } from '../../richest-api/types/transactions.req';
 import { uuid } from 'uuidv4';
 import { randomAmount } from '../support/helper'
 import { expect } from 'chai';
-import request from "supertest";
 import { Transaction } from '../../richest-api/types/transactions';
 
 const validRequest: TransactionsReq = {

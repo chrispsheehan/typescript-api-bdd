@@ -12,20 +12,9 @@
 - Install [node](https://nodejs.org/en/download/)
 - Install [yarn](https://classic.yarnpkg.com/lang/en/docs/install/#mac-stable)
 
-## Run it locally
-
-```bash
-yarn build
-yarn test
-```
-
-## Filters
-
-Filters can be appended to tests commands.
-
-Documentation found [here](https://cucumber.io/docs/cucumber/api/#tag-expressions)
-
 ## Mock API
+
+*start this before running the tests*
 
 We can use this while developing tests while the API isn't available. Can also be used for isololating dependant services.
 
@@ -33,3 +22,16 @@ We can use this while developing tests while the API isn't available. Can also b
 - Install depenancies `yarn`
 - Start live reload session (recommended): `yarn start`
 - ...OR Start static instance: `yarn static`
+
+## Run Tests
+
+```bash
+yarn build
+yarn test
+```
+
+## Filters (version 2.0)
+
+Filters can be appended to tests commands.
+
+Documentation found [here](https://cucumber.io/docs/cucumber/api/#tag-expressions)
