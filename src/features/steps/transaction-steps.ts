@@ -14,21 +14,13 @@ const validRequest: TransactionsReq = {
             date: (new Date).getDate(), // this could be UTC or ticks - would normally check
             amount: randomAmount(1, 300), // generate a random amount - check dps/min maxs + try spicy amounts
             description: "automated test" // probably add some reference helpful for debugging - datestamp?
-        }
-
-        /// There is a lot more to go into here, for example sending some naughty strings etc etc https://github.com/minimaxir/big-list-of-naughty-strings
+        }/// There is a lot more to go into here, for example sending some naughty strings etc etc https://github.com/minimaxir/big-list-of-naughty-strings
     ]
-}
-
-const invalidRequest: Object = {
-    badger: true,
-    mushroom: ["button"] // random object designed to fail
 }
 
 Given('a user has made a valid transaction request', function() {
 
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
-
     this.transactionReq = this.tranactionsapi.getTransactions(validRequest); // set in the interface to be used downstream
 });
 
@@ -44,20 +36,21 @@ Then('it should return a response with a {int} status code', async function(stat
 Given('a user has attempted to access a resource that requires authentication', function () {
 
     // simulated by NOT setting the token to a valid one
-
     this.transactionReq = this.tranactionsapi.getTransactions(validRequest); // valid req
 });
 
 Given('a user has made an invalid request', function () {
 
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
-
-    this.transactionReq = this.tranactionsapi.getTransactions(invalidRequest); // made up request which should fail
+    this.transactionReq = this.tranactionsapi.getTransactions({
+        badger: true,
+        mushroom: ["button"] // random object designed to fail
+    }); // made up request which should fail
 });
 
 Then('valid items are discovered', function() { 
 
-    //console.log('asasas' + JSON.stringify(this.transactionResp));
+    console.log('asasas' + JSON.stringify(this.transactionResp));
 
     //expect(this.transactionResp.data[0].amount).to.not.be.null
     //let transactions: Transaction[] = this.transactionResp.req.text;
