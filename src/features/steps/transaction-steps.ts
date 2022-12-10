@@ -1,5 +1,4 @@
-import { Given, Then, When } from '@cucumber/cucumber';
-import { expect } from 'chai';
+import { Given, Then } from '@cucumber/cucumber';
 import { TransactionsReq } from '../../richest-api/types/transactions.req';
 import { uuid } from 'uuidv4';
 import { randomAmount } from '../support/helper'
