@@ -24,3 +24,12 @@ yarn test
 Filters can be appended to tests commands.
 
 Documentation found [here](https://cucumber.io/docs/cucumber/api/#tag-expressions)
+
+## Mock API
+
+We can use this while developing tests while the API isn't available. Can also be used for isololating dependant services.
+
+- Move to directory `cd mock`
+- Install depenancies `yarn`
+- Start live reload session (recommended): `yarn start`
+- ...OR Start static instance: `yarn static`
