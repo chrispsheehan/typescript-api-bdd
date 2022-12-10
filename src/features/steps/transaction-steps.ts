@@ -27,14 +27,14 @@ const invalidRequest: Object = {
 
 Given('a user has made a valid transaction request', function() {
 
-    this.transactionReq = validRequest; // set in the interface to be used downstream
-
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
+
+    this.transactionReq = this.tranactionsapi.getTransactions(validRequest); // set in the interface to be used downstream
 });
 
 Then('it should return a response with a {int} status code', async function(statusCode: number) {
     
-    this.transactionResp = await this.tranactionsapi.getTransactions(this.transactionReq)
+    this.transactionResp = await this.transactionReq
     .then(function(res: any){
         expect(res.status).to.equal(statusCode) // assertion
         return res;
@@ -45,14 +45,14 @@ Given('a user has attempted to access a resource that requires authentication', 
 
     // simulated by NOT setting the token to a valid one
 
-    this.transactionReq = validRequest // valid req
+    this.transactionReq = this.tranactionsapi.getTransactions(validRequest); // valid req
 });
 
 Given('a user has made an invalid request', function () {
 
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
 
-    this.transactionReq = invalidRequest // made up request which should fail
+    this.transactionReq = this.tranactionsapi.getTransactions(invalidRequest); // made up request which should fail
 });
 
 Then('valid items are discovered', function() { 
