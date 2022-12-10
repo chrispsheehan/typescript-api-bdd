@@ -50,15 +50,15 @@ Given('a user has made an invalid request', function () {
 
 Then('valid items are discovered', function() { 
 
-    console.log('asasas' + JSON.stringify(this.transactionResp));
+    let transactions: Transaction[] = JSON.parse(JSON.parse(JSON.stringify(this.transactionResp)).text); // a bit shonky - could be down to the mock code?
 
-    //expect(this.transactionResp.data[0].amount).to.not.be.null
-    //let transactions: Transaction[] = this.transactionResp.req.text;
-    //expect(transactions[0].amount).to.be.an('string');
-    // expect(sampleTransaction.category).to.be.an('array');
-    // expect(sampleTransaction.date).to.be.an('array');
-    // expect(sampleTransaction.description).to.be.an('array');
-    // expect(sampleTransaction.id).to.be.an('array');
-    // expect(sampleTransaction.merchant).to.be.an('array');
-    // expect(sampleTransaction.regularity).to.be.an('array');
+    let transaction: Transaction = transactions[0];
+
+    expect(transaction.amount).to.be.a('number');
+    expect(transaction.category).to.be.a('string');
+    expect(transaction.date).to.be.a('number');
+    expect(transaction.description).to.be.a('string');
+    expect(transaction.id).to.be.a('string');
+    expect(transaction.merchant).to.be.an('string');
+    expect(transaction.regularity).to.be.an('string');
 });
