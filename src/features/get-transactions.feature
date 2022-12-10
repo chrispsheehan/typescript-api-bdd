@@ -3,8 +3,6 @@ Feature: Get Tranactions
 
 Background: A valid request is made
     Given a user has made a valid transaction request
-    Then it should return a response with a 200 status code
 
 Scenario: Response is valid
-    When the response json is returned
     Then valid items are discovered

@@ -1,9 +1,10 @@
-import { Given, Then } from '@cucumber/cucumber';
+import { Given, Then, When } from '@cucumber/cucumber';
 import { TransactionsReq } from '../../richest-api/types/transactions.req';
 import { uuid } from 'uuidv4';
 import { randomAmount } from '../support/helper'
 import { expect } from 'chai';
 import request from "supertest";
+import { Transaction } from '../../richest-api/types/transactions';
 
 const validRequest: TransactionsReq = {
     enrichments: [ "some-enrichment"], //not sure on the expected values here
@@ -31,11 +32,12 @@ Given('a user has made a valid transaction request', function() {
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
 });
 
-Then('it should return a response with a {int} status code', function(statusCode: number) {
+Then('it should return a response with a {int} status code', async function(statusCode: number) {
     
-    this.tranactionsapi.getTransactions(this.transactionReq) // execute the request
+    this.transactionResp = this.tranactionsapi.getTransactions(this.transactionReq) // execute the request
     .end(function(err: any, res: any){
         expect(res.status).to.equal(statusCode) // assertion
+        return res;
     });
 });
 
@@ -58,4 +60,46 @@ Given('a user has made an invalid request', function () {
     this.tranactionsapi.setToken(this.token); // passing in the valid token makes it 'valid'
 
     this.transactionReq = invalidRequest // made up request which should fail
+});
+
+Then('valid items are discovered', function() { 
+    // let transactions: Transaction[] = JSON.parse(JSON.stringify(this.transactionResp.data));
+
+    // console.log('mewo' + JSON.stringify(transactions));
+    this.transactionResp = this.tranactionsapi.getTransactions(this.transactionReq) // execute the request
+    .then((resp: any) => {
+
+        //let transactions: Transaction[] = resp.data;
+
+        //console.log('asasasasasasasas' + JSON.stringify(resp))
+
+        let asasas = JSON.parse(JSON.stringify(resp));
+
+        console.log('bbbbb' + JSON.stringify(asasas.req.data));
+        // // Check the response type and length
+        // expect(Array.isArray(response.body)).toBeTruthy()
+        // expect(response.body.length).toEqual(1)
+
+        // // Check the response data
+        // expect(response.body[0]._id).toBe(post.id)
+        // expect(response.body[0].title).toBe(post.title)
+        // expect(response.body[0].content).toBe(post.content)
+    })
+
+    //expect(this.transactionResp.data[0].amount).to.not.be.null
+
+    // let aaaa = JSON.parse(JSON.stringify(this.transactionResp));
+
+    // console.log('asas' + JSON.stringify(this.transactionResp));
+
+
+    // expect(this.transactionResp.data[0].amount).to.not.be.null
+    // let sampleTransaction = JSON.parse(JSON.stringify(this.transactionResp.data));
+    //expect(transactions[0].amount).to.be.an('string');
+    // expect(sampleTransaction.category).to.be.an('array');
+    // expect(sampleTransaction.date).to.be.an('array');
+    // expect(sampleTransaction.description).to.be.an('array');
+    // expect(sampleTransaction.id).to.be.an('array');
+    // expect(sampleTransaction.merchant).to.be.an('array');
+    // expect(sampleTransaction.regularity).to.be.an('array');
 });
